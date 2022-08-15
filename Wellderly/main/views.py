@@ -1,6 +1,8 @@
 #from django.shortcuts import render
 from rest_framework import viewsets
-from .serializers import UserSerializer
+from rest_framework import permissions
+from rest_framework.response import Response
+from .serializers import *
 from .models import User
 from rest_framework.permissions import AllowAny
 from rest_framework import status, response
@@ -19,3 +21,18 @@ class UserViewSet(viewsets.ModelViewSet):
         else:
             print(serializer.errors)
             return response.Response({'message': 'kennot'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UserLoginView(viewsets.ViewSet):
+    permission_classes = (permissions.AllowAny,)
+
+    def post(self, request):
+        serializer = UserLoginSerializer(data=self.request.data)
+        serializer.is_valid(raise_exception=True)
+
+        response = {
+            "status-code" : status.HTTP_200_OK,
+            "description" : "Login successful",
+        }
+
+        return Response(response, status=status.HTTP_200_OK)
