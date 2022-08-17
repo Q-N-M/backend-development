@@ -17,5 +17,4 @@ class UserViewSet(viewsets.ModelViewSet):
             serializer.save()
             return response.Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
-            print(serializer.errors)
             return response.Response({'message': 'kennot'}, status=status.HTTP_400_BAD_REQUEST)
