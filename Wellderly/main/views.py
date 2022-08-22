@@ -59,6 +59,14 @@ class UserEmojiView(viewsets.ModelViewSet):
     serializer_class = UserEmojiSerializer
     permission_classes = [AllowAny]
     
+    def list(self, request):
+        total_data = UserEmoji.objects.all().count()
+        json_data = {}
+        for i in range(5):
+            emoji_data = UserEmoji.objects.filter(emoji=i+1).count()
+            json_data['emoji_'+str(i+1)+'_data'] = (emoji_data/total_data)*100
+        return response.Response({'count_data':json_data})
+
     def create(self, request):
         serializer = self.serializer_class(data=request.data)
 
