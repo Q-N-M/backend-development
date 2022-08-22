@@ -32,3 +32,13 @@ class Activity(models.Model):
     community = models.ForeignKey(Community, on_delete=models.CASCADE)
     description = models.TextField()
 
+class Emoji(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    name = models.CharField(max_length=200)
+
+class UserEmoji(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    emoji = models.ForeignKey(Emoji, on_delete=models.CASCADE)
+    datetime = models.DateTimeField(auto_now_add=True)
+    name = models.CharField(max_length=200,null = True)
+

@@ -2,7 +2,7 @@
 from rest_framework import viewsets
 from rest_framework import permissions
 from .serializers import *
-from .models import User
+from .models import *
 from rest_framework.permissions import AllowAny
 from rest_framework import status, response
 
@@ -41,3 +41,29 @@ class UserLoginView(viewsets.ViewSet):
         }
 
         return response.Response(response_data, status=status.HTTP_200_OK)
+
+class EmojiView(viewsets.ModelViewSet):
+    queryset = Emoji.objects.all().order_by('id')
+    serializer_class = EmojiSerializer
+    permission_classes = [AllowAny]
+    
+    def create(self, request):
+        serializer = self.serializer_class(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return response.Response(serializer.data, status=status.HTTP_201_CREATED)
+
+class UserEmojiView(viewsets.ModelViewSet):
+    queryset = UserEmoji.objects.all().order_by('id')
+    serializer_class = UserEmojiSerializer
+    permission_classes = [AllowAny]
+    
+    def create(self, request):
+        serializer = self.serializer_class(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return response.Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return response.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
