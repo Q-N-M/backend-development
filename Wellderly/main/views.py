@@ -18,7 +18,7 @@ class UserViewSet(viewsets.ModelViewSet):
             serializer.save()
             return response.Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
-            return response.Response({'message': 'kennot'}, status=status.HTTP_400_BAD_REQUEST)
+            return response.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class UserLoginView(viewsets.ViewSet):
     permission_classes = (permissions.AllowAny,)
