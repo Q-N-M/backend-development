@@ -5,6 +5,7 @@ from .serializers import *
 from .models import *
 from rest_framework.permissions import AllowAny
 from rest_framework import status, response
+import datetime
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('name')
@@ -58,7 +59,21 @@ class UserEmojiView(viewsets.ModelViewSet):
     queryset = UserEmoji.objects.all().order_by('id')
     serializer_class = UserEmojiSerializer
     permission_classes = [AllowAny]
-    
+
+    def create(self, request):
+        updated_request = request.POST.copy()
+        updated_request.update({'datetime':datetime.datetime.now()})
+        serializer = self.serializer_class(data=updated_request)
+
+        if serializer.is_valid():
+            serializer.save()
+            return response.Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return response.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class UserAnalysisView(viewsets.ViewSet):
+    permission_classes = [AllowAny]
+
     def list(self, request):
         total_data = UserEmoji.objects.all().count()
         json_data = {}
@@ -68,10 +83,4 @@ class UserEmojiView(viewsets.ModelViewSet):
         return response.Response({'count_data':json_data})
 
     def create(self, request):
-        serializer = self.serializer_class(data=request.data)
-
-        if serializer.is_valid():
-            serializer.save()
-            return response.Response(serializer.data, status=status.HTTP_201_CREATED)
-        else:
-            return response.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        pass
