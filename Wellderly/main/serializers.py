@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate
 from rest_framework import serializers
-from .models import User
+from .models import *
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -38,3 +38,23 @@ class UserLoginSerializer(serializers.Serializer):
         
         data["user"] = user
         return data
+
+class EmojiSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Emoji
+        fields = ('name',)
+
+
+        def create(self, validated_data):
+            return Emoji.objects.create(**validated_data)
+
+class UserEmojiSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = UserEmoji
+        fields = ('name','emoji','datetime')
+
+
+        def create(self, validated_data):
+            return UserEmoji.objects.create(**validated_data)
+

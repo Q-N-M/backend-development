@@ -5,6 +5,9 @@ from .views import *
 router = routers.DefaultRouter()
 router.register(r'user', UserViewSet, basename='user')
 router.register(r'login', UserLoginView, basename='login')
+router.register(r'emoji', EmojiView, basename='emoji')
+router.register(r'user-emoji', UserEmojiView, basename='user-emoji')
+router.register(r'user-analysis', UserAnalysisView, basename='user-analysis')
 
 urlpatterns = [
     path('', include(router.urls)),
