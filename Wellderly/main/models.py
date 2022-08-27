@@ -39,6 +39,6 @@ class Emoji(models.Model):
 class UserEmoji(models.Model):
     id = models.BigAutoField(primary_key=True)
     emoji = models.ForeignKey(Emoji, on_delete=models.CASCADE)
-    datetime = models.DateTimeField(auto_now_add=True)
+    date = models.DateField(auto_now_add=False, null = True)
     name = models.CharField(max_length=200,null = True)
 

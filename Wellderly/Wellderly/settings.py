@@ -83,9 +83,18 @@ WSGI_APPLICATION = 'Wellderly.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
+    #'default': {
+    #    'ENGINE': 'django.db.backends.sqlite3',
+    #    'NAME': BASE_DIR / 'db.sqlite3',
+    #}
+
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'dd5lvg9oo5ctv5',
+        'USER': 'dbrjabcixabtbi',
+        'PASSWORD': 'fd3eb944da78dc9a029e0941ebcacc5d7b828ef901fa263fac703ba9e076fb41',
+        'HOST': 'ec2-34-234-240-121.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
