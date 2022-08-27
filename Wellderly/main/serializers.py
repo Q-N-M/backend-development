@@ -52,7 +52,7 @@ class UserEmojiSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserEmoji
-        fields = ('name','emoji','datetime')
+        fields = ('name','emoji','date')
 
 
         def create(self, validated_data):
