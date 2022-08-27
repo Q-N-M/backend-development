@@ -6,4 +6,5 @@ importlib-metadata==4.12.0
 Markdown==3.4.1
 pytz==2022.2.1
 sqlparse==0.4.2
+whitenoise==6.2.0
 zipp==3.8.1
