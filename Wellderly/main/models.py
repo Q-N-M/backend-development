@@ -41,4 +41,5 @@ class UserEmoji(models.Model):
     emoji = models.ForeignKey(Emoji, on_delete=models.CASCADE)
     date = models.DateField(auto_now_add=False, null = True)
     name = models.CharField(max_length=200,null = True)
+    comment = models.TextField(null = True)
 
