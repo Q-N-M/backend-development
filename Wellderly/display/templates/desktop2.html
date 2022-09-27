@@ -40,6 +40,13 @@
       data-tag="font"
     />
     <link rel="stylesheet" href="{% static './style.css' %}" />
+    <!-- Reference : https://www.jqueryscript.net/loading/Dynamic-Circular-Progress-Bar-with-jQuery-CSS3.html-->
+    <!-- Thanks to the author of https://www.jqueryscript.net/loading/Dynamic-Circular-Progress-Bar-with-jQuery-CSS3.html -->
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="{% static './Dynamic-Circular-Progress-Bar-with-jQuery-CSS3/jQuery-plugin-progressbar.js' %}"></script>
+    <link rel="stylesheet" href="{% static './Dynamic-Circular-Progress-Bar-with-jQuery-CSS3/jQuery-plugin-progressbar.css' %}">
+    <!-- Reference : https://www.w3schools.com/js/js_graphics_chartjs.asp -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
   </head>
   <body>
     <div>
@@ -106,80 +113,61 @@
                   class="desktop2-line6"
                 />
               </div>
-              <div class="desktop2-left-text">
-                <span class="desktop2-text">0</span>
-                <span class="desktop2-text01"><span>25</span></span>
-                <span class="desktop2-text03"><span>50</span></span>
-                <span class="desktop2-text05"><span>75</span></span>
-                <span class="desktop2-text07"><span>100</span></span>
-              </div>
-              <div class="desktop2-bottom-text">
-                <span class="desktop2-text09"><span>Angry</span></span>
-                <span class="desktop2-text11"><span>Sad</span></span>
-                <span class="desktop2-text13"><span>Neutral</span></span>
-                <span class="desktop2-text15"><span>Happy</span></span>
-                <span class="desktop2-text17"><span>Ecstatic</span></span>
-              </div>
-              <div class="desktop2-columns1">
-                <img
-                  src="{% static 'public/playground_assets/image113262-y6hb-200w.png' %}"
-                  alt="IMAGE113262"
-                  class="desktop2-i-m-a-g-e11"
-                />
-                <img
-                  src="{% static 'public/playground_assets/image123262-qdsh-200w.png' %}"
-                  alt="IMAGE123262"
-                  class="desktop2-i-m-a-g-e12"
-                />
-                <img
-                  src="{% static 'public/playground_assets/image133262-lu4i-200w.png' %}"
-                  alt="IMAGE133262"
-                  class="desktop2-i-m-a-g-e13"
-                />
-                <img
-                  src="{% static 'public/playground_assets/image143262-a6r-200w.png' %}"
-                  alt="IMAGE143262"
-                  class="desktop2-i-m-a-g-e14"
-                />
-                <img
-                  src="{% static 'public/playground_assets/image153262-8ktr-200w.png' %}"
-                  alt="IMAGE153262"
-                  class="desktop2-i-m-a-g-e15"
-                />
-              </div>
-              <div class="desktop2-texts1">
-                <span class="desktop2-text19"><span>40</span></span>
-                <span class="desktop2-text21"><span>25</span></span>
-                <span class="desktop2-text23"><span>60</span></span>
-                <span class="desktop2-text25"><span>45</span></span>
-                <span class="desktop2-text27"><span>85</span></span>
-              </div>
+              <!-- Reference : https://www.w3schools.com/js/tryit.asp?filename=tryai_chartjs_bars_colors -->
+              <canvas id="myChart" style="width:100%;"></canvas>
+              <script>
+                var xValues = ["Angry", "Sad", "Neutral", "Happy", "Ecstatic"];
+                var yValues = [parseInt("{{ Angry }}"),
+                parseInt("{{ Sad }}"),
+                parseInt("{{ Neutral }}"),
+                parseInt("{{ Happy }}"),
+                parseInt("{{ Ecstatic }}")];
+                var barColors = [
+                  "rgba(211,69,91,1)",
+                  "rgba(44,136,217,1)",
+                  "rgba(247,195,37,1)",
+                  "rgba(156,210,114,1)",
+                  "rgba(26,174,159,1)"
+                ];
+                
+                new Chart("myChart", {
+                  type: "bar",
+                  data: {
+                    labels: xValues,
+                    datasets: [{
+                      barPercentage: 0.2,
+                      backgroundColor: barColors,
+                      data: yValues
+                    }]
+                  },
+                  options: {
+                    legend: {display: false},
+                    scales: {
+                      yAxes: [{
+                        ticks: {
+                          beginAtZero: true
+                        }
+                      }],
+                    }
+                  }
+                });
+              </script>
             </div>
             <span class="desktop2-text29"><span>Today’s Moods</span></span>
           </div>
           <div class="desktop2-group86">
             <div class="desktop2-frame53">
-              <span class="desktop2-text31"><span>33%</span></span>
-              <div class="desktop2-n-bcharts-rings">
-                <div class="desktop2-background1">
-                  <img
-                    src="{% static 'public/playground_assets/ellipse3263-ccsl-300h.png' %}"
-                    alt="Ellipse3263"
-                    class="desktop2-ellipse"
-                  />
-                </div>
-                <div class="desktop2-rings1">
-                  <img
-                    src="{% static 'public/playground_assets/ecstatic333263-kbr-200w.png' %}"
-                    alt="Ecstatic333263"
-                    class="desktop2-ecstatic33"
-                  />
-                </div>
-              </div>
+              <div class="progress-bar" data-percent="{{ Percentage }}" data-duration="1000" data-color="#ccc,#1aad9e"></div>
+              <script>
+                $(".progress-bar").loading();
+                $('input').on('click', function () {
+                  $(".progress-bar").loading();
+                });
+              </script>
             </div>
             <span class="desktop2-text33">
               <span class="desktop2-text34">
-                Hooray! 33% of the population feels
+                Hooray! {{ Percentage }}% of the population feels
               </span>
               <span class="desktop2-text35">Happy</span>
               <span>today!</span>
@@ -272,7 +260,7 @@
               </div>
               <span class="desktop2-text43">
                 <span class="desktop2-text44">
-                  <span>40 of 225</span>
+                  <span>{{ Angry }} of {{ TotalUser }}</span>
                   <br />
                   <span>feel</span>
                 </span>
@@ -309,7 +297,7 @@
               </div>
               <span class="desktop2-text49">
                 <span class="desktop2-text50">
-                  <span>25 of 225</span>
+                  <span>{{ Sad }} of {{ TotalUser }}</span>
                   <br />
                   <span>feel</span>
                 </span>
@@ -319,7 +307,7 @@
             <div class="desktop2-group90">
               <span class="desktop2-text55">
                 <span class="desktop2-text56">
-                  <span>60 of 225</span>
+                  <span>{{ Neutral }} of {{ TotalUser }}</span>
                   <br />
                   <span>feel</span>
                 </span>
@@ -353,7 +341,7 @@
             <div class="desktop2-group91">
               <span class="desktop2-text61">
                 <span class="desktop2-text62">
-                  <span>45 of 225</span>
+                  <span>{{ Happy }} of {{ TotalUser }}</span>
                   <br />
                   <span>feel</span>
                 </span>
@@ -387,7 +375,7 @@
             <div class="desktop2-group92">
               <span class="desktop2-text67">
                 <span class="desktop2-text68">
-                  <span>85 of 225</span>
+                  <span>{{ Ecstatic }} of {{ TotalUser }}</span>
                   <br />
                   <span>feels</span>
                 </span>
@@ -443,11 +431,11 @@
           </div>
           <span class="desktop2-text73">
             <span class="desktop2-text74">
-              <span>Today, August 22nd 2022</span>
+              <span>{{ Time }}</span>
               <br />
               <span></span>
             </span>
-            <span>Blue Care Tangara Retirement Village</span>
+            <span>{{ Location }}</span>
           </span>
           <span class="desktop2-text79"><span>Today’s Moods</span></span>
         </div>

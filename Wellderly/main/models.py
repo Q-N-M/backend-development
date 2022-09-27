@@ -15,13 +15,22 @@ class User(models.Model):
     emergency_contact = models.CharField(max_length=256, null=True)
     birth_date = models.DateField(null=True)
 
+    def __str__(self):
+        return self.name
+
 class Community(models.Model):
     id = models.BigAutoField(primary_key=True)
     name = models.CharField(max_length=200)
 
+    def __str__(self):
+        return self.name
+
 class Transport(models.Model):
     id = models.BigAutoField(primary_key=True)
     name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
 
 class Activity(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -36,6 +45,9 @@ class Emoji(models.Model):
     id = models.BigAutoField(primary_key=True)
     name = models.CharField(max_length=200)
 
+    def __str__(self):
+        return self.name
+
 class UserEmoji(models.Model):
     id = models.BigAutoField(primary_key=True)
     emoji = models.ForeignKey(Emoji, on_delete=models.CASCADE)
@@ -43,3 +55,5 @@ class UserEmoji(models.Model):
     name = models.CharField(max_length=200,null = True)
     comment = models.TextField(null = True)
 
+    def __str__(self):
+        return self.name
