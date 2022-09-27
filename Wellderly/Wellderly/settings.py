@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -43,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'rest_framework',
-    'livechat'
+    'display'
 ]
 
 MIDDLEWARE = [
@@ -54,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
 ROOT_URLCONF = 'Wellderly.urls'
@@ -61,7 +63,7 @@ ROOT_URLCONF = 'Wellderly.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['../display/templates/'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -81,9 +83,18 @@ WSGI_APPLICATION = 'Wellderly.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
+    #'default': {
+    #    'ENGINE': 'django.db.backends.sqlite3',
+    #    'NAME': BASE_DIR / 'db.sqlite3',
+    #}
+
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'dd5lvg9oo5ctv5',
+        'USER': 'dbrjabcixabtbi',
+        'PASSWORD': 'fd3eb944da78dc9a029e0941ebcacc5d7b828ef901fa263fac703ba9e076fb41',
+        'HOST': 'ec2-34-234-240-121.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
@@ -135,7 +146,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

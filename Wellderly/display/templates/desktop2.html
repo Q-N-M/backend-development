@@ -1,0 +1,445 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="english">
+  <head>
+    <title>exported project</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <style data-tag="reset-style-sheet">
+      html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6 {  margin: 0;  padding: 0;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
+    </style>
+    <style data-tag="default-style-sheet">
+      html {
+        font-family: Inter;
+        font-size: 16px;
+      }
+
+      body {
+        font-weight: 400;
+        font-style:normal;
+        text-decoration: none;
+        text-transform: none;
+        letter-spacing: normal;
+        line-height: 1.15;
+        color: var(--dl-color-gray-black);
+        background-color: var(--dl-color-gray-white);
+
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      data-tag="font"
+    />
+    <link rel="stylesheet" href="{% static './style.css' %}" />
+    <!-- Reference : https://www.jqueryscript.net/loading/Dynamic-Circular-Progress-Bar-with-jQuery-CSS3.html-->
+    <!-- Thanks to the author of https://www.jqueryscript.net/loading/Dynamic-Circular-Progress-Bar-with-jQuery-CSS3.html -->
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="{% static './Dynamic-Circular-Progress-Bar-with-jQuery-CSS3/jQuery-plugin-progressbar.js' %}"></script>
+    <link rel="stylesheet" href="{% static './Dynamic-Circular-Progress-Bar-with-jQuery-CSS3/jQuery-plugin-progressbar.css' %}">
+    <!-- Reference : https://www.w3schools.com/js/js_graphics_chartjs.asp -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+  </head>
+  <body>
+    <div>
+      <link href="{% static './desktop2.css' %}" rel="stylesheet" />
+
+      <div class="desktop2-container">
+        <div class="desktop2-desktop2">
+          <div class="desktop2-group85">
+            <div class="desktop2-n-bchartscolumn-chats">
+              <div class="desktop2-horizontal-lines">
+                <img
+                  src="{% static 'public/playground_assets/line13262-a8pc.svg' %}"
+                  alt="line13262"
+                />
+                <img
+                  src="{% static 'public/playground_assets/line23262-enbi.svg' %}"
+                  alt="line23262"
+                />
+                <img
+                  src="{% static 'public/playground_assets/line33262-pz0f.svg' %}"
+                  alt="line33262"
+                  class="desktop2-line3"
+                />
+                <img
+                  src="{% static 'public/playground_assets/line43262-tl3.svg' %}"
+                  alt="line43262"
+                  class="desktop2-line4"
+                />
+                <img
+                  src="{% static 'public/playground_assets/line53262-eo6p.svg' %}"
+                  alt="line53262"
+                  class="desktop2-line5"
+                />
+              </div>
+              <div class="desktop2-vertical-lines">
+                <img
+                  src="{% static 'public/playground_assets/line13262-ao1f.svg' %}"
+                  alt="line13262"
+                  class="desktop2-line11"
+                />
+                <img
+                  src="{% static 'public/playground_assets/line23262-txw.svg' %}"
+                  alt="line23262"
+                  class="desktop2-line21"
+                />
+                <img
+                  src="{% static 'public/playground_assets/line33262-ogbf.svg' %}"
+                  alt="line33262"
+                  class="desktop2-line31"
+                />
+                <img
+                  src="{% static 'public/playground_assets/line43262-nnps.svg' %}"
+                  alt="line43262"
+                  class="desktop2-line41"
+                />
+                <img
+                  src="{% static 'public/playground_assets/line53262-wo7.svg' %}"
+                  alt="line53262"
+                  class="desktop2-line51"
+                />
+                <img
+                  src="{% static 'public/playground_assets/line63262-18zm.svg' %}"
+                  alt="line63262"
+                  class="desktop2-line6"
+                />
+              </div>
+              <!-- Reference : https://www.w3schools.com/js/tryit.asp?filename=tryai_chartjs_bars_colors -->
+              <canvas id="myChart" style="width:100%;"></canvas>
+              <script>
+                var xValues = ["Angry", "Sad", "Neutral", "Happy", "Ecstatic"];
+                var yValues = [parseInt("{{ Angry }}"),
+                parseInt("{{ Sad }}"),
+                parseInt("{{ Neutral }}"),
+                parseInt("{{ Happy }}"),
+                parseInt("{{ Ecstatic }}")];
+                var barColors = [
+                  "rgba(211,69,91,1)",
+                  "rgba(44,136,217,1)",
+                  "rgba(247,195,37,1)",
+                  "rgba(156,210,114,1)",
+                  "rgba(26,174,159,1)"
+                ];
+                
+                new Chart("myChart", {
+                  type: "bar",
+                  data: {
+                    labels: xValues,
+                    datasets: [{
+                      barPercentage: 0.2,
+                      backgroundColor: barColors,
+                      data: yValues
+                    }]
+                  },
+                  options: {
+                    legend: {display: false},
+                    scales: {
+                      yAxes: [{
+                        ticks: {
+                          beginAtZero: true
+                        }
+                      }],
+                    }
+                  }
+                });
+              </script>
+            </div>
+            <span class="desktop2-text29"><span>Today’s Moods</span></span>
+          </div>
+          <div class="desktop2-group86">
+            <div class="desktop2-frame53">
+              <div class="progress-bar" data-percent="{{ Percentage }}" data-duration="1000" data-color="#ccc,#1aad9e"></div>
+              <script>
+                $(".progress-bar").loading();
+                $('input').on('click', function () {
+                  $(".progress-bar").loading();
+                });
+              </script>
+            </div>
+            <span class="desktop2-text33">
+              <span class="desktop2-text34">
+                Hooray! {{ Percentage }}% of the population feels
+              </span>
+              <span class="desktop2-text35">Happy</span>
+              <span>today!</span>
+            </span>
+            <span class="desktop2-text37"><span>Mood of The Day</span></span>
+          </div>
+          <div class="desktop2-frame55">
+            <img
+              src="{% static 'public/playground_assets/rectangle33263-7iwf-300h.png' %}"
+              alt="Rectangle33263"
+              class="desktop2-rectangle3"
+            />
+            <div class="desktop2-group84">
+              <div class="desktop2-frame12">
+                <span class="desktop2-text39">
+                  <span>
+                    “Ever since using this app, I feel less lonely and more
+                    connected to my community”
+                  </span>
+                </span>
+              </div>
+              <div class="desktop2-group12">
+                <img
+                  src="{% static 'public/playground_assets/ellipse53263-8blj-200h.png' %}"
+                  alt="Ellipse53263"
+                  class="desktop2-ellipse5"
+                />
+                <img
+                  src="{% static 'public/playground_assets/ellipse63263-0bk-200h.png' %}"
+                  alt="Ellipse63263"
+                  class="desktop2-ellipse6"
+                />
+                <img
+                  src="{% static 'public/playground_assets/ellipse73263-qe6j-200h.png' %}"
+                  alt="Ellipse73263"
+                  class="desktop2-ellipse7"
+                />
+                <img
+                  src="{% static 'public/playground_assets/ellipse83263-5rm-200h.png' %}"
+                  alt="Ellipse83263"
+                  class="desktop2-ellipse8"
+                />
+                <img
+                  src="{% static 'public/playground_assets/ellipse93263-3w0m-200h.png' %}"
+                  alt="Ellipse93263"
+                  class="desktop2-ellipse9"
+                />
+              </div>
+            </div>
+            <span class="desktop2-text41"><span>What They Say...</span></span>
+          </div>
+          <img
+            src="{% static 'public/playground_assets/rectangle13262-x6i-700w.png' %}"
+            alt="Rectangle13262"
+            class="desktop2-rectangle1"
+          />
+          <div class="desktop2-frame54">
+            <div class="desktop2-group88">
+              <div class="desktop2-line">
+                <img
+                  src="{% static 'public/playground_assets/vector3263-vqkb.svg' %}"
+                  alt="Vector3263"
+                  class="desktop2-vector"
+                />
+                <img
+                  src="{% static 'public/playground_assets/vector3263-n77.svg' %}"
+                  alt="Vector3263"
+                  class="desktop2-vector01"
+                />
+                <img
+                  src="{% static 'public/playground_assets/vector3263-noct.svg' %}"
+                  alt="Vector3263"
+                  class="desktop2-vector02"
+                />
+                <img
+                  src="{% static 'public/playground_assets/vector3263-wqcf.svg' %}"
+                  alt="Vector3263"
+                  class="desktop2-vector03"
+                />
+                <img
+                  src="{% static 'public/playground_assets/vector3263-j3zo.svg' %}"
+                  alt="Vector3263"
+                  class="desktop2-vector04"
+                />
+                <img
+                  src="{% static 'public/playground_assets/vector3263-ursa.svg' %}"
+                  alt="Vector3263"
+                  class="desktop2-vector05"
+                />
+              </div>
+              <span class="desktop2-text43">
+                <span class="desktop2-text44">
+                  <span>{{ Angry }} of {{ TotalUser }}</span>
+                  <br />
+                  <span>feel</span>
+                </span>
+                <span>Angry</span>
+              </span>
+            </div>
+            <div class="desktop2-group89">
+              <div class="desktop2-line1">
+                <img
+                  src="{% static 'public/playground_assets/vector3263-q54.svg' %}"
+                  alt="Vector3263"
+                  class="desktop2-vector06"
+                />
+                <img
+                  src="{% static 'public/playground_assets/vector3263-sare.svg' %}"
+                  alt="Vector3263"
+                  class="desktop2-vector07"
+                />
+                <img
+                  src="{% static 'public/playground_assets/vector3263-y83e.svg' %}"
+                  alt="Vector3263"
+                  class="desktop2-vector08"
+                />
+                <img
+                  src="{% static 'public/playground_assets/vector3263-qcdk.svg' %}"
+                  alt="Vector3263"
+                  class="desktop2-vector09"
+                />
+                <img
+                  src="{% static 'public/playground_assets/vector3263-clv.svg' %}"
+                  alt="Vector3263"
+                  class="desktop2-vector10"
+                />
+              </div>
+              <span class="desktop2-text49">
+                <span class="desktop2-text50">
+                  <span>{{ Sad }} of {{ TotalUser }}</span>
+                  <br />
+                  <span>feel</span>
+                </span>
+                <span>Sad</span>
+              </span>
+            </div>
+            <div class="desktop2-group90">
+              <span class="desktop2-text55">
+                <span class="desktop2-text56">
+                  <span>{{ Neutral }} of {{ TotalUser }}</span>
+                  <br />
+                  <span>feel</span>
+                </span>
+                <span>Neutral</span>
+              </span>
+              <div class="desktop2-group64">
+                <div class="desktop2-color">
+                  <img
+                    src="{% static 'public/playground_assets/vector3263-t83.svg' %}"
+                    alt="Vector3263"
+                    class="desktop2-vector11"
+                  />
+                </div>
+                <img
+                  src="{% static 'public/playground_assets/vector3263-1pzu.svg' %}"
+                  alt="Vector3263"
+                  class="desktop2-vector12"
+                />
+                <img
+                  src="{% static 'public/playground_assets/vector3263-tud3.svg' %}"
+                  alt="Vector3263"
+                  class="desktop2-vector13"
+                />
+                <img
+                  src="{% static 'public/playground_assets/vector3263-kwbp.svg' %}"
+                  alt="Vector3263"
+                  class="desktop2-vector14"
+                />
+              </div>
+            </div>
+            <div class="desktop2-group91">
+              <span class="desktop2-text61">
+                <span class="desktop2-text62">
+                  <span>{{ Happy }} of {{ TotalUser }}</span>
+                  <br />
+                  <span>feel</span>
+                </span>
+                <span>Happy</span>
+              </span>
+              <div class="desktop2-group66">
+                <div class="desktop2-color1">
+                  <img
+                    src="{% static 'public/playground_assets/vector3263-ri5r.svg' %}"
+                    alt="Vector3263"
+                    class="desktop2-vector15"
+                  />
+                </div>
+                <img
+                  src="{% static 'public/playground_assets/vector3263-gtze.svg' %}"
+                  alt="Vector3263"
+                  class="desktop2-vector16"
+                />
+                <img
+                  src="{% static 'public/playground_assets/vector3263-njlr.svg' %}"
+                  alt="Vector3263"
+                  class="desktop2-vector17"
+                />
+                <img
+                  src="{% static 'public/playground_assets/vector3263-lmo3.svg' %}"
+                  alt="Vector3263"
+                  class="desktop2-vector18"
+                />
+              </div>
+            </div>
+            <div class="desktop2-group92">
+              <span class="desktop2-text67">
+                <span class="desktop2-text68">
+                  <span>{{ Ecstatic }} of {{ TotalUser }}</span>
+                  <br />
+                  <span>feels</span>
+                </span>
+                <span>Ecstatic</span>
+              </span>
+              <div class="desktop2-line2">
+                <img
+                  src="{% static 'public/playground_assets/vector3263-n0le.svg' %}"
+                  alt="Vector3263"
+                  class="desktop2-vector19"
+                />
+                <div class="desktop2-group68">
+                  <div class="desktop2-color2">
+                    <img
+                      src="{% static 'public/playground_assets/vector3263-8fec.svg' %}"
+                      alt="Vector3263"
+                      class="desktop2-vector20"
+                    />
+                    <img
+                      src="{% static 'public/playground_assets/vector3263-spu.svg' %}"
+                      alt="Vector3263"
+                      class="desktop2-vector21"
+                    />
+                    <img
+                      src="{% static 'public/playground_assets/vector3263-c08a.svg' %}"
+                      alt="Vector3263"
+                      class="desktop2-vector22"
+                    />
+                  </div>
+                  <img
+                    src="{% static 'public/playground_assets/vector3263-732a.svg' %}"
+                    alt="Vector3263"
+                    class="desktop2-vector23"
+                  />
+                  <img
+                    src="{% static 'public/playground_assets/vector3263-l69.svg' %}"
+                    alt="Vector3263"
+                    class="desktop2-vector24"
+                  />
+                  <img
+                    src="{% static 'public/playground_assets/vector3263-msdo.svg' %}"
+                    alt="Vector3263"
+                    class="desktop2-vector25"
+                  />
+                  <img
+                    src="{% static 'public/playground_assets/vector3263-jii.svg' %}"
+                    alt="Vector3263"
+                    class="desktop2-vector26"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <span class="desktop2-text73">
+            <span class="desktop2-text74">
+              <span>{{ Time }}</span>
+              <br />
+              <span></span>
+            </span>
+            <span>{{ Location }}</span>
+          </span>
+          <span class="desktop2-text79"><span>Today’s Moods</span></span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -11,5 +11,5 @@ router.register(r'user-analysis', UserAnalysisView, basename='user-analysis')
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
