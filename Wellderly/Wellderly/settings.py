@@ -27,6 +27,7 @@ SECRET_KEY = 'django-insecure-)^+znl4asf7rnj2-+hf(mduw+8sgyx(w+jw&13s6)xvmgq%uqa
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    '*'
     'localhost',
     '127.0.0.1',
     'deco3801-qnm.uqcloud.net'
